@@ -2,6 +2,11 @@ import React from "react";
 
 export default function Form(props){
 
+    function handleSubmit(e){
+        e.preventDefault();
+        e.alert("Hello ")
+    }
+
     return(
         <>
             <form>
