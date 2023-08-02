@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Todo from "./componentes/Todo"
 import Form from "./componentes/Form";
 import FilterButton from "./componentes/FilterButton";
+import {nanoid} from "nanoid"
 
 function App(props) {
 
@@ -12,12 +13,21 @@ function App(props) {
   id={task.id} 
   name={task.name} 
   completed={task.completed} 
-  key={task.id}/>
+  key={task.id}
+  toggleTaskCompleted = {toggleTaskCompleted}
+  />
   ));
 
   function addTask(name){
-    const newTask = {id: 'id', name, completed: false};
+    const newTask = {id: `todo-${nanoid()}`, name, completed: false};
     setTasks([...tasks, newTask]);
+  }
+
+  const tasksNoun = taskList.length !== 1 ? 'tarefas' : 'tarefa';
+  const headingText = `${taskList.length} ${tasksNoun} restantes`;
+
+  function toggleTaskCompleted(id){
+    console.log(tasks[0])
   }
   
   return (
@@ -29,7 +39,7 @@ function App(props) {
         <FilterButton/>
         <FilterButton/>
       </div>
-      <h2 id="list-heading">3 tasks remaining</h2>
+      <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
